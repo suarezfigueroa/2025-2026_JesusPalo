@@ -1,0 +1,492 @@
+<section class="perfil-section">
+  <!-- SIDEBAR -->
+  <div class="perfil-layout">
+    <aside class="perfil-sidebar">
+      <div class="perfil-avatar">
+        <div class="perfil-foto-container">
+          <img id="perfil-foto" src="" alt="Foto de perfil">
+          <label for="perfil-foto-input" class="perfil-foto-btn">
+            <span class="material-symbols-outlined">photo_camera</span>
+          </label>
+          <input type="file" id="perfil-foto-input" accept="image/*" style="display:none;">
+          <button type="button" id="perfil-foto-borrar" class="perfil-foto-borrar-btn" style="display:none;">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+        <h3 id="perfil-nombre-sidebar"></h3>
+        <span id="perfil-rol-badge" class="rol-badge"></span>
+      </div>
+
+      <div class="perfil-nav">
+        <button class="perfil-nav-btn active" data-seccion="datos">
+          <span class="material-symbols-outlined">person</span>
+          Mis datos
+        </button>
+        <button class="perfil-nav-btn rol-paciente rol-doctor" data-seccion="citas">
+          <span class="material-symbols-outlined">calendar_month</span>
+          Mis citas
+        </button>
+        <button class="perfil-nav-btn rol-paciente" data-seccion="tratamientos">
+          <span class="material-symbols-outlined">medical_services</span>
+          Mis tratamientos
+        </button>
+        <button class="perfil-nav-btn rol-doctor" data-seccion="pacientes">
+          <span class="material-symbols-outlined">group</span>
+          Mis pacientes
+        </button>
+        <button class="perfil-nav-btn rol-admin" data-seccion="admin">
+          <span class="material-symbols-outlined">admin_panel_settings</span>
+          Panel admin
+        </button>
+        <button class="perfil-nav-btn btn-logout" id="btn-logout">
+          <span class="material-symbols-outlined">logout</span>
+          Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="perfil-contenido">
+      <!-- DATOS PERSONALES -->
+      <div id="seccion-datos" class="perfil-panel active">
+        <h2 class="perfil-titulo">Mis Datos</h2>
+        <form id="form-perfil">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" id="perfil-nombre" required />
+            </div>
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input type="text" id="perfil-apellidos" required />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="perfil-email" required />
+            </div>
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input type="tel" id="perfil-telefono" />
+            </div>
+            <div class="form-group">
+              <label>DNI</label>
+              <input type="text" id="perfil-dni" />
+            </div>
+            <div class="form-group">
+              <label>Fecha de nacimiento</label>
+              <input type="date" id="perfil-fecha" />
+            </div>
+            <div class="form-group">
+              <label>Dirección</label>
+              <input type="text" id="perfil-direccion" placeholder="Tu dirección" />
+            </div>
+          </div>
+          <div id="perfil-msg" class="auth-mensaje" style="display:none;"></div>
+          <button type="submit" class="buttons auth-btn">
+            <span class="material-symbols-outlined">save</span>
+            <span>Guardar cambios</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- CITAS -->
+      <div id="seccion-citas" class="perfil-panel">
+        <h2 class="perfil-titulo">Mis Citas</h2>
+        <div id="contenedor-citas">
+          <p class="cargando">Cargando citas...</p>
+        </div>
+      </div>
+
+      <!-- TRATAMIENTOS -->
+      <div id="seccion-tratamientos" class="perfil-panel">
+        <h2 class="perfil-titulo">Mis Tratamientos</h2>
+        <div id="contenedor-mis-tratamientos">
+          <p class="cargando">Cargando tratamientos...</p>
+        </div>
+      </div>
+
+      <!-- PACIENTES (doctor) -->
+      <div id="seccion-pacientes" class="perfil-panel">
+        <h2 class="perfil-titulo">Mis Pacientes</h2>
+        <div id="contenedor-mis-pacientes">
+          <p class="cargando">Cargando pacientes...</p>
+        </div>
+      </div>
+
+  </div>
+
+
+<!-- Modal historial -->
+<div id="modal-historial" class="modal hidden">
+  <div class="modal-historial-contenido">
+    
+    <!-- Header del modal -->
+    <div class="modal-header">
+      <h2 id="historial-titulo"></h2>
+      <button id="btn-cerrar-historial">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Body del modal: contenedor de columnas -->
+    <div class="modal-body">
+
+      <!-- Columna Citas -->
+      <div class="columna-historial" id="col-citas">
+        <h4>
+          <span class="material-symbols-outlined">calendar_month</span> Citas
+        </h4>
+        <div id="historial-citas"></div>
+      </div>
+
+      <!-- Columna Tratamientos -->
+      <div class="columna-historial" id="col-tratamientos">
+        <h4>
+          <span class="material-symbols-outlined">medical_services</span> Tratamientos
+        </h4>
+        <div id="historial-tratamientos"></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Modal crear cita doctor -->
+<div id="modal-cita-doctor" class="modal hidden">
+  <div class="modal-historial-contenido">
+    <div class="modal-header">
+      <h2 class="cita-doctor-titulo"></h2>
+      <button id="btn-cerrar-cita-doctor">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Fecha</label>
+        <input type="date" id="cita-doctor-fecha">
+      </div>
+      <div class="form-group">
+        <label>Hora</label>
+        <select id="cita-doctor-hora" disabled>
+          <option value="">-- Elige primero una fecha --</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Motivo</label>
+        <textarea id="cita-doctor-motivo" rows="3" placeholder="Motivo de la cita..."></textarea>
+      </div>
+      <div id="cita-doctor-msg" class="auth-mensaje" style="display:none;"></div>
+      <button class="buttons auth-btn" id="btn-enviar-cita-doctor" style="margin-top:1rem;">
+        <span class="material-symbols-outlined">send</span>
+        <span>Crear cita</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL ASIGNAR TRATAMIENTO -->
+<div id="modal-tratamiento" class="modal">
+  <div class="modal-historial-contenido">
+
+    <!-- Encabezado -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+      <h2 class="asignar-titulo"></h2>
+      <button id="btn-cerrar-tratamiento">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Formulario -->
+    <form id="form-asignar-tratamiento">
+      
+      <label>Tratamiento</label>
+      <select id="select-tratamiento" required></select>
+
+      <label>Fecha inicio</label>
+      <input type="date" id="fecha-inicio-trat" required>
+
+      <label>Fecha fin</label>
+      <input type="date" id="fecha-fin-trat">
+
+      <label>Descripción</label>
+      <textarea id="descripcion"></textarea>
+
+      <!-- Mensaje -->
+      <div id="asignar-msg" style="display:none;"></div>
+
+      <!-- Botones -->
+      <div style="margin-top:1rem; display:flex; gap:1rem;">
+        <button type="button" id="btn-cancelar-asignar">Cancelar</button>
+        <button type="button" id="btn-asignar">Asignar</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<!-- Modal Nueva Cita -->
+<div id="modal-nueva-cita" class="modal hidden">
+  <div class="modal-historial-contenido">
+    
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>Solicitar nueva cita</h2>
+      <button id="btn-cerrar-nueva-cita">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+      <div id="form-nueva-cita">
+        <!-- Aquí se clona tu template -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Template cita paciente -->
+<template id="template-cita-paciente">
+  <div class="cita-card">
+    <div class="cita-card-header">
+      <div class="cita-estado">
+        <span class="material-symbols-outlined cita-estado-icono"></span>
+        <span class="cita-estado-texto"></span>
+      </div>
+      <div class="cita-fecha">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span class="cita-fecha-texto"></span>
+      </div>
+    </div>
+    <div class="cita-card-body">
+      <p>
+        <span class="material-symbols-outlined">stethoscope</span>
+        <span class="cita-doctor"></span>
+      </p>
+      <p>
+        <span class="material-symbols-outlined">notes</span>
+        <span class="cita-motivo"></span>
+      </p>
+    </div>
+    <div class="cita-card-footer cita-footer-cancelar" style="display:none;">
+      <button class="btn-cancelar-cita">
+        <span class="material-symbols-outlined">cancel</span>
+        Cancelar cita
+      </button>
+    </div>
+  </div>
+</template>
+
+<!-- Template cita doctor -->
+<template id="template-cita-doctor">
+  <div class="cita-card">
+    <div class="cita-card-header">
+      <div class="cita-estado">
+        <span class="material-symbols-outlined cita-estado-icono"></span>
+        <span class="cita-estado-texto"></span>
+      </div>
+      <div class="cita-fecha">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span class="cita-fecha-texto"></span>
+      </div>
+    </div>
+    <div class="cita-card-body">
+      <p>
+        <span class="material-symbols-outlined">person</span>
+        <span class="cita-paciente"></span>
+      </p>
+      <p>
+        <span class="material-symbols-outlined">notes</span>
+        <span class="cita-motivo"></span>
+      </p>
+    </div>
+    <div class="cita-card-footer" style="display:none;">
+      <button class="btn-accion confirmar" style="display:none;">
+        <span class="material-symbols-outlined">check</span> Confirmar
+      </button>
+      <button class="btn-accion completar" style="display:none;">
+        <span class="material-symbols-outlined">task_alt</span> Completar
+      </button>
+      <button class="btn-accion cancelar" style="display:none;">
+        <span class="material-symbols-outlined">close</span> Cancelar
+      </button>
+    </div>
+  </div>
+</template>
+
+<!-- Template paciente doctor -->
+<template id="template-paciente-doctor">
+  <div class="cita-card">
+    <div class="cita-card-header">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <img class="paciente-foto" style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
+        <div>
+          <strong class="paciente-nombre"></strong>
+          <p class="paciente-email" style="font-size:0.85rem; color:var(--slate-600);"></p>
+        </div>
+      </div>
+    </div>
+    <div class="cita-card-body">
+      <p>
+        <span class="material-symbols-outlined">phone</span>
+        <span class="paciente-telefono"></span>
+      </p>
+      <p>
+        <span class="material-symbols-outlined">badge</span>
+        <span class="paciente-dni"></span>
+      </p>
+    </div>
+    <div class="cita-card-footer">
+      <button class="btn-accion confirmar">
+        <span class="material-symbols-outlined">medical_services</span> Asignar tratamiento
+      </button>
+       <button class="btn-accion completar btn-ver-historial">
+        <span class="material-symbols-outlined">history</span> Ver historial
+      </button>
+           <button class="btn-accion confirmar btn-crear-cita-doctor">
+        <span class="material-symbols-outlined">calendar_month</span> Crear cita
+      </button>
+    </div>
+  </div>
+</template>
+
+<!-- Template form nueva cita -->
+<template id="template-form-nueva-cita">
+  <div class="nueva-cita-form">
+    <h3>Solicitar nueva cita</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Doctor</label>
+        <select id="cita-doctor">
+          <option value="">Selecciona un doctor</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Fecha</label>
+        <input type="date" id="cita-fecha">
+      </div>
+      <div class="form-group">
+        <label>Hora</label>
+        <select id="cita-hora" disabled>
+          <option value="">-- Elige primero doctor y fecha --</option>
+        </select>
+      </div>
+      <div class="form-group" style="grid-column: 1/-1;">
+        <label>Motivo de la consulta</label>
+        <textarea id="cita-motivo" rows="3" placeholder="Describe el motivo de tu consulta..."></textarea>
+      </div>
+    </div>
+    <div id="cita-msg" class="auth-mensaje" style="display:none;"></div>
+    <button class="buttons auth-btn" id="btn-enviar-cita">
+      <span class="material-symbols-outlined">send</span>
+      <span>Solicitar cita</span>
+    </button>
+  </div>
+</template>
+
+<!-- Template form asignar tratamiento -->
+<template id="template-form-asignar">
+  <div class="nueva-cita-form">
+    <h3 class="asignar-titulo"></h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Tratamiento</label>
+        <select id="select-tratamiento">
+          <option value="">Selecciona un tratamiento</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Fecha inicio</label>
+        <input type="date" id="fecha-inicio-trat">
+      </div>
+      <div class="form-group">
+        <label>Fecha fin</label>
+        <input type="date" id="fecha-fin-trat">
+      </div>
+    </div>
+    <div id="asignar-msg" class="auth-mensaje" style="display:none;"></div>
+    <div style="display:flex; gap:1rem; margin-top:1rem;">
+      <button class="buttons auth-btn" id="btn-asignar">
+        <span class="material-symbols-outlined">add</span>
+        <span>Asignar</span>
+      </button>
+      <button class="buttons" id="btn-cancelar-asignar" style="background:var(--slate-600);">
+        <span>Cancelar</span>
+      </button>
+    </div>
+  </div>
+</template>
+
+<!-- Template tratamientos paciente -->
+<template id="template-tratamiento-paciente">
+  <div class="cita-card">
+    <div class="cita-card-header">
+      <img class="trat-img" style="width:60px; height:60px; border-radius:12px; object-fit:cover;">
+      <div>
+        <strong class="trat-nombre"></strong>
+        <p class="trat-fechas" style="font-size:0.85rem; color:var(--slate-600);"></p>
+      </div>
+    </div>
+    <div class="cita-card-body">
+      <p><span class="material-symbols-outlined">description</span><span class="trat-descripcion"></span></p>
+      <p><span class="material-symbols-outlined">payments</span><span class="trat-precio"></span></p>
+      <p><span class="material-symbols-outlined">receipt</span><span class="trat-pago-estado"></span></p>
+    </div>
+    <div class="cita-card-footer trat-footer-pago" style="display:none;">
+      <button class="btn-pagar">
+        <span class="material-symbols-outlined">credit_card</span>
+        Pagar ahora
+      </button>
+    </div>
+  </div>
+</template>
+<!-- Template historial citas paciente -->
+<template id="template-historial-cita">
+  <div class="cita-card">
+    <div class="cita-card-header">
+      <div class="cita-estado">
+        <span class="material-symbols-outlined hist-icono"></span>
+        <span class="hist-estado"></span>
+      </div>
+      <div class="cita-fecha">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <span class="hist-fecha"></span>
+      </div>
+    </div>
+    <div class="cita-card-body">
+      <p>
+        <span class="material-symbols-outlined">notes</span>
+        <span class="hist-motivo"></span>
+      </p>
+    </div>
+  </div>
+</template>
+
+<!-- Template historial tratamientos paciente -->
+<template id="template-historial-tratamiento">
+  <div class="cita-card">
+    <div class="cita-card-header">
+      <img class="hist-trat-img" style="width:50px; height:50px; border-radius:10px; object-fit:cover;">
+      <div>
+        <strong class="hist-trat-nombre"></strong>
+        <p class="hist-trat-fechas" style="font-size:0.85rem; color:var(--slate-600);"></p>
+      </div>
+    </div>
+    <div class="cita-card-body">
+      <p>
+        <span class="material-symbols-outlined">description</span>
+        <span class="hist-trat-descripcion"></span>
+      </p>
+    </div>
+  </div>
+</template>
+
+
+</section>

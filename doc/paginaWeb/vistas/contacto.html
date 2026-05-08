@@ -1,0 +1,114 @@
+<!-- HERO -->
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="img/dentro2.mp4" type="video/mp4">
+    Tu navegador no soporta la etiqueta de video.
+  </video>
+  <div>
+    <h1>Contacta con Nosotros</h1>
+    <p>Estamos aquí para ayudarte. Reserva tu cita o consúltanos cualquier duda.</p>
+  </div>
+</section>
+
+<!-- INFO + FORM -->
+<section>
+  <div class="grid-2 grid-2-streetch">
+
+    <div class="card-contacto" style="padding:2rem;">
+      <h3>Información de Contacto</h3>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">📍</span>
+        <div>
+          <strong>Dirección</strong>
+          <p>Los Carmenes, 06300 Zafra</p>
+        </div>
+      </div>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">📞</span>
+        <div>
+          <strong>Teléfono</strong>
+          <p>922 000 000</p>
+        </div>
+      </div>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">✉️</span>
+        <div>
+          <strong>Email</strong>
+          <p>info@zafisio.com</p>
+        </div>
+      </div>
+
+      <div class="contacto-item">
+        <span class="contacto-icono">🕒</span>
+        <div>
+          <strong>Horario</strong>
+          <p>Lunes a Viernes: 9:00 - 20:00</p>
+          <p>Sábados: 9:00 - 13:00</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-contacto" style="padding:2rem;">
+      <h3>Solicita Información</h3>
+
+      <form id="form-contacto" novalidate>
+
+        <div class="campo-contacto">
+          <input type="text" id="contacto-nombre" placeholder="Nombre *" maxlength="80" autocomplete="name">
+          <span class="campo-error" id="err-nombre"></span>
+        </div>
+
+        <div class="campo-contacto">
+          <input type="email" id="contacto-email" placeholder="Email *" maxlength="120" autocomplete="email">
+          <span class="campo-error" id="err-email"></span>
+        </div>
+
+        <div class="campo-contacto">
+          <input type="tel" id="contacto-telefono" placeholder="Teléfono (opcional)" maxlength="20" autocomplete="tel">
+          <span class="campo-error" id="err-telefono"></span>
+        </div>
+
+        <div class="campo-contacto">
+          <textarea id="contacto-mensaje" rows="5" placeholder="Mensaje * (mínimo 10 caracteres)" maxlength="1000"></textarea>
+          <div class="campo-contador">
+            <span class="campo-error" id="err-mensaje"></span>
+            <span id="contador-mensaje" class="contador-chars">0 / 1000</span>
+          </div>
+        </div>
+
+        <div id="contacto-msg" class="auth-mensaje" style="display:none;"></div>
+
+        <button class="buttons" type="submit" id="btn-contacto">
+          <span class="material-symbols-outlined">send</span>
+          <span>Enviar Solicitud</span>
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAPA -->
+<section style="background-color:#f9fafb;">
+  <div class="text-center">
+    <h2 class="section-title">Cómo Llegar</h2>
+    <p class="section-desc">
+      Encuéntranos fácilmente en nuestra ubicación.
+    </p>
+  </div>
+
+  <div style="max-width:1100px;margin:auto;">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!4v1773856859694!6m8!1m7!1s8_chNZpn9sDtxQQ0aO3QVQ!2m2!1d38.41720989178492!2d-6.41568012362391!3f327.06030626163823!4f-16.902298677823097!5f0.7820865974627469"
+      width="100%"
+      height="450"
+      style="border:0;border-radius:1rem;box-shadow:0 10px 25px rgba(0,0,0,0.15);"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+</section>

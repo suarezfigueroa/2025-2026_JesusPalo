@@ -1,0 +1,767 @@
+.citas-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+/* Botón Nueva Cita */
+.btn-nueva-cita {
+  display: inline-flex;             /* permite icono + texto alineados */
+  align-items: center;              /* centra verticalmente icono y texto */
+  justify-content: center;          /* centra horizontalmente */
+  gap: 0.5rem;                      /* espacio entre icono y texto */
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #6399d3, #A9D3FF);
+  color: #fff;
+  transition: background 0.3s ease, transform 0.2s ease;}
+
+
+.btn-nueva-cita:hover {
+  background: linear-gradient(135deg, #0056b3, #008fbf);
+  transform: translateY(-1px);
+}
+
+.btn-nueva-cita:active {
+  transform: translateY(0);
+}
+
+.btn-nueva-cita .material-symbols-outlined {
+  font-size: 1.2rem;
+}
+
+/* Adaptación móvil */
+@media (max-width: 480px) {
+  .btn-nueva-cita {
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+.cita-card {
+  background: rgba(255,255,255,0.8);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(169,211,255,0.3);
+  box-shadow: 0 4px 15px rgba(99,153,211,0.1);
+  transition: all 0.3s ease;
+}
+
+.cita-card:hover {
+  box-shadow: 0 8px 25px rgba(99,153,211,0.2);
+  transform: translateY(-2px);
+}
+
+.cita-card.estado-cancelada { opacity: 0.6; }
+
+.cita-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(169,211,255,0.3);
+}
+
+.cita-estado {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.cita-fecha {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--slate-600);
+  font-size: 0.9rem;
+}
+
+.cita-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cita-card-body p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--slate-700);
+  font-size: 0.95rem;
+}
+
+.cita-card-body .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--secundary);
+}
+
+.cita-card-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(169,211,255,0.3);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.btn-cancelar-cita {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(239,68,68,0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239,68,68,0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-cancelar-cita:hover { background: rgba(239,68,68,0.2); }
+
+.nueva-cita-form {
+  background: rgba(169,211,255,0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(169,211,255,0.3);
+}
+
+.nueva-cita-form h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--slate-800);
+  margin-bottom: 1.5rem;
+}
+
+.nueva-cita-form select,
+.nueva-cita-form textarea {
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  border: 2px solid rgba(169,211,255,0.4);
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: var(--slate-800);
+  background: rgba(255,255,255,0.8);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.nueva-cita-form select:focus,
+.nueva-cita-form textarea:focus {
+  border-color: var(--secundary);
+  box-shadow: 0 0 0 4px rgba(99,153,211,0.15);
+}
+
+.sin-datos {
+  text-align: center;
+  color: var(--slate-600);
+  padding: 2rem;
+  font-size: 1rem;
+}
+
+.citas-filtros {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.filtro-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid rgba(169,211,255,0.4);
+  border-radius: 50px;
+  background: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--slate-600);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtro-btn:hover {
+  border-color: var(--secundary);
+  color: var(--secundary);
+}
+
+.filtro-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secundary));
+  border-color: transparent;
+  color: white;
+}
+
+.btn-accion {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-accion.confirmar {
+  background: rgba(34,197,94,0.1);
+  color: #16a34a;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+.btn-accion.confirmar:hover { background: rgba(34,197,94,0.2); }
+
+.btn-accion.cancelar {
+  background: rgba(239,68,68,0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+.btn-accion.cancelar:hover { background: rgba(239,68,68,0.2); }
+
+.btn-accion.completar {
+  background: rgba(99,153,211,0.1);
+  color: var(--secundary);
+  border: 1px solid rgba(99,153,211,0.3);
+}
+
+.btn-accion.completar:hover { background: rgba(99,153,211,0.2); }
+
+
+
+/* ==============================
+   MODAL HISTORIAL
+   ============================== */
+#modal-historial {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#modal-historial.visible {
+  display: flex;
+}
+
+.modal-historial-contenido {
+  background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(169,211,255,0.15));
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 950px;  /* más ancho para columnas */
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(99,153,211,0.3);
+  border: 1px solid rgba(169,211,255,0.3);
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Body: columnas lado a lado */
+.modal-body {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+/* Cada columna (Citas / Tratamientos) */
+.columna-historial {
+  flex: 1 1 45%;
+  background: rgba(255,255,255,0.95);
+  padding: 1.5rem;
+  border-radius: 16px;
+  max-height: 60vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(99,153,211,0.15);
+  min-width: 0;  /* importante para evitar que el contenido fuerce ancho */
+}
+
+/* Títulos h4 dentro de cada columna */
+.columna-historial h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: #1e2a48;
+}
+
+/* Tarjetas para cada cita/tratamiento insertada por JS */
+#historial-citas > div,
+#historial-tratamientos > div {
+  background: #fff;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Scroll interno bonito */
+.columna-historial::-webkit-scrollbar {
+  width: 6px;
+}
+
+.columna-historial::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-historial-contenido {
+    max-width: 95%;
+    padding: 1.5rem;
+  }
+  .modal-body {
+    flex-wrap: wrap;  /* columnas apilan verticalmente */
+    gap: 1rem;
+  }
+  .columna-historial {
+    flex-basis: 100%;
+    max-height: 40vh;
+  }
+}
+
+
+
+/* ==============================
+   MODAL ASIGNAR TRATAMIENTO
+   ============================== */
+#modal-tratamiento {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  padding: 1rem;
+}
+
+#modal-tratamiento.visible {
+  display: flex;
+}
+
+#modal-tratamiento .modal-historial-contenido {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222831;
+  position: relative;
+}
+
+#modal-tratamiento .asignar-titulo {
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+#btn-cerrar-tratamiento {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #222831;
+  transition: color 0.2s ease;
+}
+#btn-cerrar-tratamiento:hover {
+  color: #007BFF;
+}
+
+/* Formulario */
+
+#form-asignar-tratamiento label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #393E46;
+  margin-top: 1rem;
+}
+
+#form-asignar-tratamiento select,
+#form-asignar-tratamiento input[type="date"],
+#form-asignar-tratamiento textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+#form-asignar-tratamiento select:focus,
+#form-asignar-tratamiento input[type="date"]:focus,
+#form-asignar-tratamiento textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Textarea más alto */
+#form-asignar-tratamiento textarea {
+  min-height: 80px;
+}
+
+/* Contenedor de botones alineados a la derecha */
+#form-asignar-tratamiento > div:last-child {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Botones */
+#btn-cancelar-asignar,
+#btn-asignar {
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#btn-cancelar-asignar {
+  background-color: #ccc;
+  color: #333;
+}
+
+#btn-cancelar-asignar:hover {
+  background-color: #b3b3b3;
+}
+
+#btn-asignar {
+  background: linear-gradient(135deg, #6399d3, #A9D3FF);
+  color: white;
+}
+
+#btn-asignar:hover {
+  background: linear-gradient(135deg, #0056b3, #008fbf);
+}
+
+/* Mensaje de estado */
+#asignar-msg {
+  margin-top: 1rem;
+  font-weight: 600;
+  display: none;
+}
+
+.auth-mensaje.error {
+  color: #e63946;
+}
+
+.auth-mensaje.exito {
+  color: #2a9d8f;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  #modal-tratamiento .modal-historial-contenido {
+    padding: 1.5rem 1.8rem;
+  }
+}
+
+/* ==============================
+   MODAL NUEVA CITA
+   ============================== */
+#modal-nueva-cita {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  padding: 1rem;
+}
+
+#modal-nueva-cita.visible {
+  display: flex;
+}
+
+/* Contenedor central */
+#modal-nueva-cita .modal-historial-contenido {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222831;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header */
+#modal-nueva-cita .modal-header h2 {
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+#btn-cerrar-nueva-cita {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #222831;
+  transition: color 0.2s ease;
+}
+
+#btn-cerrar-nueva-cita:hover {
+  color: #007BFF;
+}
+
+/* Form body */
+#form-nueva-cita {
+  width: 100%;
+}
+
+/* Formularios internos del template */
+#form-nueva-cita label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #393E46;
+  margin-top: 1rem;
+}
+
+#form-nueva-cita select,
+#form-nueva-cita input[type="datetime-local"],
+#form-nueva-cita textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+#form-nueva-cita select:focus,
+#form-nueva-cita input[type="datetime-local"]:focus,
+#form-nueva-cita textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Textarea más alto */
+#form-nueva-cita textarea {
+  min-height: 80px;
+}
+
+/* Botón enviar */
+#btn-enviar-cita {
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #6399d3, #A9D3FF);
+  transition: background 0.3s ease;
+}
+
+#btn-enviar-cita:hover {
+  background: linear-gradient(135deg, #0056b3, #008fbf);
+}
+
+/* Mensaje de estado */
+#cita-msg {
+  margin-top: 1rem;
+  font-weight: 600;
+  display: none;
+}
+
+.auth-mensaje.error {
+  color: #e63946;
+}
+
+.auth-mensaje.exito {
+  color: #2a9d8f;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  #modal-nueva-cita .modal-historial-contenido {
+    padding: 1.5rem 1.8rem;
+  }
+}
+
+/* ==============================
+   MODAL CREAR CITA DOCTOR
+   ============================== */
+#modal-cita-doctor {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  padding: 1rem;
+}
+
+#modal-cita-doctor.visible {
+  display: flex;
+}
+
+#modal-cita-doctor .modal-historial-contenido {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  color: #222831;
+  position: relative;
+}
+
+#btn-cerrar-cita-doctor {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #222831;
+  transition: color 0.2s ease;
+}
+
+#btn-cerrar-cita-doctor:hover {
+  color: #007BFF;
+}
+
+#modal-cita-doctor label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #393E46;
+  margin-top: 1rem;
+}
+
+#modal-cita-doctor input[type="datetime-local"],
+#modal-cita-doctor textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  resize: vertical;
+}
+
+#modal-cita-doctor input[type="datetime-local"]:focus,
+#modal-cita-doctor textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+#modal-cita-doctor textarea {
+  min-height: 80px;
+}
+
+#btn-enviar-cita-doctor {
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #6399d3, #A9D3FF);
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+#btn-enviar-cita-doctor:hover {
+  background: linear-gradient(135deg, #0056b3, #008fbf);
+}
+
+@media (max-width: 480px) {
+  #modal-cita-doctor .modal-historial-contenido {
+    padding: 1.5rem 1.8rem;
+  }
+}
+
+
+#modal-cita-doctor .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#modal-cita-doctor .form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#modal-cita-doctor .modal-body > * {
+  width: 100%;
+}
