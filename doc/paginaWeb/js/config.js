@@ -44,5 +44,5 @@ const estadoBadges = {
 
 // Helper para rutas de fotos
 function rutaFoto(foto, fallback = "img/icono-de-usuario.png") {
-  return foto ? foto : fallback;
+  return foto ? `${foto}?v=${Date.now()}` : fallback;
 }
